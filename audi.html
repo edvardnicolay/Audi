@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Language Quiz</h1>
+    <div id="quiz">
+        <div class="question">
+            <p>1. Que es 18 en noruego?</p>
+            <input type="radio" name="q1" value="Fjorten"> Fjorten<br>
+            <input type="radio" name="q1" value="Atten"> Atten<br>
+            <input type="radio" name="q1" value="sytten"> Sytten<br>
+        </div>
+        <div class="question">
+            <p>2. Como se dice viernes en noruego?</p>
+            <input type="radio" name="q2" value="Tirsdag"> Tirsdag<br>
+            <input type="radio" name="q2" value="Lørdag"> Lørdag<br>
+            <input type="radio" name="q2" value="Fredag"> Fredag<br>
+        </div>
+        <div class="question">
+            <p>3. Escribe "Te amo" en noruego:</p>
+            <input type="text" id="q3" name="q3"><br>
+        </div>
+        <div class="question">
+            <p>3. Quien es la chica mas hermosa del mundo:</p>
+            <input type="text" id="q4" name="q4"><br>
+        </div>
+        <button onclick="checkAnswers()">Submit</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            const answers = {
+                q1: 'Atten',
+                q2: 'Fredag',
+                q3: 'jeg elsker deg',
+                q4: 'claudia'
+            };
+            let score = 0;
+            for (const [question, answer] of Object.entries(answers)) {
+                if (question === 'q3' || question === 'q4') {
+                    const userAnswer = document.getElementById(question).value.trim().toLowerCase();
+                    if (userAnswer === answer) {
+                        score++;
+                    }
+                } else {
+                    const selected = document.querySelector(`input[name="${question}"]:checked`);
+                    if (selected && selected.value === answer) {
+                        score++;
+                    }
+                }
+            }
+            document.getElementById('result').innerText = `Sacaste ${score} de ${Object.keys(answers).length}`;
+        }
+    </script>
+</body>
+</html>
